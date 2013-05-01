@@ -7,13 +7,11 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.view.View.MeasureSpec;
 
 public class Speedometer extends View implements SpeedChangeListener {
 	private static final String TAG = Speedometer.class.getSimpleName();
@@ -28,16 +26,17 @@ public class Speedometer extends View implements SpeedChangeListener {
 	private Paint offMarkPaint;
 	private Paint scalePaint;
 	private Paint readingPaint;
-	private Bitmap background;
 	private Path onPath;
 	private Path offPath;
 	final RectF oval = new RectF();
 	
 	// Drawing colors
 	private int ON_COLOR = Color.argb(255, 0xff, 0xA5, 0x00);
-	private int OFF_COLOR = Color.argb(100,0x3e,0x3e,0x3e);
+	private int OFF_COLOR = Color.argb(255,0x3e,0x3e,0x3e);
 	private int SCALE_COLOR = Color.argb(255, 255, 255, 255);
-
+	private float SCALE_SIZE = 14f;
+	private float READING_SIZE = 60f;
+	
 	// Scale configuration
 	private float centerX;
 	private float centerY;
@@ -60,6 +59,8 @@ public class Speedometer extends View implements SpeedChangeListener {
 			ON_COLOR = a.getColor(R.styleable.Speedometer_onColor, ON_COLOR);
 			OFF_COLOR = a.getColor(R.styleable.Speedometer_offColor, OFF_COLOR);
 			SCALE_COLOR = a.getColor(R.styleable.Speedometer_scaleColor, SCALE_COLOR);
+			SCALE_SIZE = a.getDimension(R.styleable.Speedometer_scaleTextSize, SCALE_SIZE);
+			READING_SIZE = a.getDimension(R.styleable.Speedometer_readingTextSize, READING_SIZE);
 		} finally{
 			a.recycle();
 		}
@@ -76,11 +77,12 @@ public class Speedometer extends View implements SpeedChangeListener {
 		
 		offMarkPaint = new Paint(onMarkPaint);
 		offMarkPaint.setColor(OFF_COLOR);
+		offMarkPaint.setStyle(Paint.Style.FILL_AND_STROKE);
 		offMarkPaint.setShadowLayer(0f, 0f, 0f, OFF_COLOR);
 		
 		scalePaint = new Paint(offMarkPaint);
 		scalePaint.setStrokeWidth(2f);
-		scalePaint.setTextSize(14f);
+		scalePaint.setTextSize(SCALE_SIZE);
 		scalePaint.setShadowLayer(5f, 0f, 0f, Color.RED);
 		scalePaint.setColor(SCALE_COLOR);
 		

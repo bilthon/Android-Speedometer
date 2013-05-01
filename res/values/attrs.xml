@@ -6,5 +6,7 @@
         <attr name="onColor" format="color"></attr>
         <attr name="offColor" format="color"></attr>
         <attr name="scaleColor" format="color"></attr>
+        <attr name="scaleTextSize" format="dimension"></attr>
+        <attr name="readingTextSize" format="dimension"></attr>
     </declare-styleable>
 </resources>
