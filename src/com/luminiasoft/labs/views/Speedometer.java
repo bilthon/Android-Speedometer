@@ -209,12 +209,16 @@ public class Speedometer extends View implements SpeedChangeListener {
 	
 	private void drawReading(Canvas canvas){
 		Path path = new Path();
-		float centerOffset;
-		if(this.mCurrentSpeed < 100) centerOffset = 30f;
-		else centerOffset = 50f;
-		path.moveTo(centerX-centerOffset, centerY);
-		path.lineTo(centerX+centerOffset, centerY);
-		canvas.drawTextOnPath(String.format("%d", (int)this.mCurrentSpeed), path, 0f, 0f, readingPaint);
+		String message = String.format("%d", (int)this.mCurrentSpeed);
+		float[] widths = new float[message.length()];
+		readingPaint.getTextWidths(message, widths);
+		float advance = 0;
+		for(double width:widths)
+			advance += width;
+		Log.d(TAG,"advance: "+advance);
+		path.moveTo(centerX - advance/2, centerY);
+		path.lineTo(centerX + advance/2, centerY);
+		canvas.drawTextOnPath(message, path, 0f, 0f, readingPaint);
 	}
 
 	@Override
