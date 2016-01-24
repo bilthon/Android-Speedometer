@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/Users/nelson/Development/Android/Demos/Android-Speedometer/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4/ic_launcher.png",
+        "source": "/Users/nelson/Development/Android/Demos/Android-Speedometer/app/src/main/res/drawable-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/nelson/Development/Android/Apps/Android-Speedometer-AS/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4/ic_launcher.png",
+        "source": "/Users/nelson/Development/Android/Apps/Android-Speedometer-AS/app/src/main/res/drawable-xhdpi/ic_launcher.png"
+    }
+]
