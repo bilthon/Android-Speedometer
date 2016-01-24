@@ -9,7 +9,6 @@ import android.graphics.Path;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 public class Speedometer extends View implements SpeedChangeListener {
@@ -43,12 +42,10 @@ public class Speedometer extends View implements SpeedChangeListener {
 
 	public Speedometer(Context context){
 		super(context);
-		Log.d(TAG,"Speedometer(Context) called");
 	}
 	
 	public Speedometer(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		Log.d(TAG,"Speedometer(Context, AttributeSet) called");
 		TypedArray a = context.getTheme().obtainStyledAttributes(attrs, 
 				R.styleable.Speedometer, 
 				0, 0);
@@ -111,7 +108,6 @@ public class Speedometer extends View implements SpeedChangeListener {
 	
 	@Override
 	protected void onSizeChanged(int width, int height, int oldw, int oldh) {
-		Log.d(TAG, "Size changed to " + width + "x" + height);
 		
 		// Setting up the oval area in which the arc will be drawn
 		if (width > height){
@@ -171,8 +167,6 @@ public class Speedometer extends View implements SpeedChangeListener {
 	 * @param canvas
 	 */
 	private void drawScaleBackground(Canvas canvas){
-		canvas.drawARGB(255, 0, 0, 0);
-		Log.d(TAG,"drawScaleBackground");
 		offPath.reset();
 		for(int i = -180; i < 0; i+=4){
 			offPath.addArc(oval, i, 2f);
@@ -214,7 +208,6 @@ public class Speedometer extends View implements SpeedChangeListener {
 		float advance = 0;
 		for(double width:widths)
 			advance += width;
-		Log.d(TAG,"advance: "+advance);
 		path.moveTo(centerX - advance/2, centerY);
 		path.lineTo(centerX + advance/2, centerY);
 		canvas.drawTextOnPath(message, path, 0f, 0f, readingPaint);
